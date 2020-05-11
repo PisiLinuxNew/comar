@@ -27,6 +27,7 @@
 #ifndef SCRIPT_H
 #define SCRIPT_H
 
+#define PY_SSIZE_T_CLEAN
 #include <Python.h>
 
 extern PyObject *py_core;

@@ -1,11 +1,13 @@
+SET(CMAKE_INSTALL_PREFIX "/usr" CACHE PATH "set prefix: /usr" FORCE)
 # Project name
 PROJECT (comar)
-
+# TODO: python3 için eklenen py3 ifadeleri silinecek
 # CMake 2.6 required
 CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
 
 # Python is required
-FIND_PACKAGE(PythonLibs)
+FIND_PACKAGE(PythonInterp "3" REQUIRED)
+FIND_PACKAGE(PythonLibs "3" REQUIRED)
 
 FIND_PACKAGE(PkgConfig)
 PKG_CHECK_MODULES (DBUS REQUIRED dbus-1)
@@ -13,7 +15,6 @@ PKG_CHECK_MODULES (DBUS REQUIRED dbus-1)
 # Application name
 SET (APP_NAME "comar")
 SET (APP_SUFFIX "3")
-
 # Uncomment this for production releases.
 SET (VERSION_SUFFIX "")
 #SET (FLAGS "-g -O0 -Werror -Wcast-align -Wno-uninitialized -Wall -fstrict-aliasing")
@@ -33,7 +34,7 @@ ENDIF (APP_SUFFIX)
 ADD_DEFINITIONS (
                  -D'PID_FILE="/run/${APP_NAME}.pid"'
                  -D'DATA_DIR="/var/lib/${APP_NAME}"'
-                 -D'LOG_DIR="/var/log/${APP_NAME}"')
+                 -D'LOG_DIR="/var/log/${APP_NAME}py3"')
 
 # Set standard sources
 SET (SOURCES src/main.c
@@ -53,16 +54,16 @@ SET (SOURCES src/main.c
 SET (LIBS ${PYTHON_LIBRARIES}
           dbus-1)
 
-# Include standard headers
-INCLUDE_DIRECTORIES (include/
-                     ${PYTHON_INCLUDE_DIRS}
-                     ${DBUS_INCLUDE_DIRS})
+include_directories(include/
+                    ${PYTHON_INCLUDE_DIRS}
+                    ${DBUS_INCLUDE_DIRS})
 
 # Compile comar from specified sources
 ADD_EXECUTABLE (comar ${SOURCES})
 
 # Link comar to specified libraries
 TARGET_LINK_LIBRARIES(comar ${LIBS} )
+
 
 # Install comar to /usr/sbin/<app-name>
 INSTALL (PROGRAMS comar
@@ -101,9 +102,9 @@ INSTALL (FILES
 # Install hav to /usr/bin/hav
 INSTALL (PROGRAMS tools/hav.py
          DESTINATION /usr/bin
-         RENAME hav)
+         RENAME havpy3)
 
 # Install hav to /usr/bin/comar2to3
 INSTALL (PROGRAMS tools/comar2to3.py
          DESTINATION /usr/bin
-         RENAME comar2to3)
+         RENAME comar2to3py3)

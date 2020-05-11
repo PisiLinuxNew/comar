@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
 import dbus
@@ -14,7 +14,7 @@ COMAR_TIMEOUT = 10
 
 def main():
     if os.getuid() != 0:
-        print "Must be run as root."
+        print("Must be run as root.")
         return -1
 
     # If COMAR 3.0 database is already initialized, do nothing.
@@ -30,14 +30,14 @@ def main():
                 init = True
                 break
         if init:
-            print "COMAR database is already initialized."
+            print("COMAR database is already initialized.")
             return 0
 
     bus = dbus.SystemBus()
     obj = None
 
     # Old PiSi releases start new COMAR service after all postInstall
-    # operations complete. We start our own COMAR service so we 
+    # operations complete. We start our own COMAR service so we
     # guarantee that we register all scripts to new COMAR.
     os.system("/usr/sbin/comar -i -b %s &" % COMAR_ADDRESS)
 
@@ -53,7 +53,7 @@ def main():
         timeout -= 0.2
 
     if not obj:
-        print "Unable to start new COMAR service."
+        print("Unable to start new COMAR service.")
         return -2
 
     # Register all scripts
@@ -66,7 +66,7 @@ def main():
             if _app == "comar" and ignore_comar:
                 continue
             obj.register(_app, _model, os.path.join(COMAR_DB_OLD, filename), dbus_interface=COMAR_IFACE)
-            print "Registering %s" % filename
+            print("Registering %s" % filename)
 
     return 0
 

@@ -27,6 +27,7 @@
 #ifndef DB_H
 #define DB_H
 
+#define PY_SSIZE_T_CLEAN
 #include <Python.h>
 
 int db_load_models(PyObject **py_models);

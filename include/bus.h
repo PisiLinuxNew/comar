@@ -28,6 +28,7 @@
 #ifndef BUS_H
 #define BUS_H
 
+#define PY_SSIZE_T_CLEAN
 #include <Python.h>
 #include <dbus/dbus.h>
 
