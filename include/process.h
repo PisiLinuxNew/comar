@@ -28,6 +28,7 @@
 #ifndef PROCESS_H
 #define PROCESS_H
 
+#define PY_SSIZE_T_CLEAN
 #include <Python.h>
 #include <dbus/dbus.h>
 

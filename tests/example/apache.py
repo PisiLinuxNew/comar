@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
 MSG = {
@@ -12,4 +12,4 @@ def info():
 
 def start():
     notify("System.Service", "Changed", (script(), "started"))
-    print _(MSG)
+    print(_(MSG))

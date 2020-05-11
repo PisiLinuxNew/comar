@@ -30,6 +30,7 @@
 #define TYPES_BASIC "sbixd"
 #define TYPES_CONTAINER "arD"
 
+#define PY_SSIZE_T_CLEAN
 #include <Python.h>
 #include <dbus/dbus.h>
 
